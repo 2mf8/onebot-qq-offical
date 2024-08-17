@@ -1,0 +1,74 @@
+syntax =  "proto3";
+package onebot;
+import "onebot_base.proto";
+option go_package= "./onebot";
+
+message Api {
+    ActionType action = 1;
+    Params params = 2;
+    string echo = 3;
+    message Params {
+        string user_id = 1;
+        string group_id = 2;
+        string guild_id = 3;
+        Message message = 4;
+        Message messages = 5;
+        string message_type = 6;
+        bool auto_escape = 7;
+        string message_id = 8;
+        string id = 9;
+        bool reject_add_request = 10;
+        int32 duration = 11;
+        bool enable = 12;
+        string card = 13;
+        string group_name = 14;
+        bool approve = 15;
+        string remark = 16;
+        string content = 17;
+    }
+}
+
+enum ActionType{
+    TUnknown = 0;
+    send_private_msg = 1;
+	send_group_msg = 2;
+	send_msg = 3;
+	send_forward_msg = 4;
+	delete_msg = 5;
+	get_msg = 6;
+	get_forward_msg = 7;
+	send_like = 8; 
+	set_group_kick = 9;
+	set_group_ban = 10;
+	set_group_anonymous_ban = 11;
+	set_group_whole_ban = 12;
+	set_group_admin = 13;
+	set_group_anonymous = 14;
+	set_group_card = 15;
+	set_group_name = 16;
+	set_group_leave = 17;
+	set_group_special_title = 18;
+	set_friend_add_request = 19;
+	set_group_add_request = 20;
+	get_login_info = 21;
+	get_stranger_info = 22;
+	get_friend_list = 23;
+	get_group_info = 24;
+	get_group_list = 25;
+	get_group_member_info = 26;
+	get_group_member_list = 27;
+	get_group_honor_info = 28;
+	get_cookies = 29; 
+	get_csrf_token = 30;
+	get_credentials = 31;
+	get_record = 32;
+	get_image = 33;
+	can_send_image = 34;
+	can_send_record = 35;
+	get_status = 36;
+	get_version_info = 37;
+	set_restart = 38;
+	clean_cache = 39;
+	group_poke = 40;
+	friend_poke = 41;
+}

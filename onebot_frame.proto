@@ -1,0 +1,32 @@
+syntax = "proto3";
+package onebot;
+import "onebot_api.proto";
+import "onebot_event.proto";
+option go_package="./onebot";
+message Frame{
+    int64 bot_id = 1;
+    FrameType frame_type = 2;
+    string echo = 3;
+    bool ok = 4; // 是否正常 （API resp）
+    map<string, string> extra = 100;
+
+    oneof data{
+        C2CMessageEvent c2c_message_event = 101;
+        GroupMessageEvent group_message_event = 102;
+        GroupNotifyEvent group_notify_event = 103;
+        C2CNotifyEvent c2c_notify_event = 104;
+
+        Api api = 201;
+    }
+
+    enum FrameType{
+        TUNKNOWN = 0;
+
+        TC2CMessageEvent = 101;
+        TGroupMessageEvent = 102;
+        TGroupNotifyEvent = 103;
+        TC2CNotifyEvent = 104;
+
+        TApi = 201;
+    }
+}

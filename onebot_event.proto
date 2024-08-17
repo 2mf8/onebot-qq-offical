@@ -1,0 +1,110 @@
+syntax =  "proto3";
+package onebot;
+import  "onebot_base.proto";
+option go_package= "./onebot";
+
+message C2CMessageEvent{
+    int64 time = 1;
+    int64 self_id = 2;
+    string post_type = 3;
+    string message_type = 4;
+    string sub_type = 5;
+    string message_id = 6; 
+    string user_id = 7; // C2C user_openid, 频道 tiny_id
+    repeated Message message = 8;
+    string raw_message = 9;
+    int32 font = 10;
+    Sender sender = 11;
+    string guild_id = 12; // 频道私信传入
+    string channel_id = 13; // 频道私信传入
+    message Sender{
+        string user_id = 1; // C2C user_openid, 频道 tiny_id
+        string nickname = 2;
+        string sex = 3;
+        int32 age = 4;
+        string avatar = 5;
+        bool is_bot = 6;
+        string join_at = 7;
+        repeated string roles = 8;
+    }
+    message Attachments{
+        string content = 1;
+        string content_type = 2;
+        string filename = 3;
+        int32 height = 4;
+        int32 size = 5;
+        string url = 6;
+        int32 width = 7;
+    }
+    map<string, string> extra = 255;
+}
+
+message GroupMessageEvent {
+    int64 time = 1;
+    int64 self_id = 2;
+    string post_type = 3;
+    string message_type = 4; // group / （guild/根据guild_id字段判断）
+    string sub_type = 5;
+    string message_id = 6;
+    string group_id = 7; // 群聊时 group_open_id , 频聊时 channel_id
+    string user_id = 8; // 群聊时 member_openid , 频聊时 tiny_id
+    Anonymous anonymous = 9;
+    repeated Message message = 10;
+    string raw_message = 11;
+    int32 font = 12;
+    Sender sender = 13;
+    string guild_id = 14; // 频聊时传入
+    int32 message_seq = 15;
+    Attachments attachments = 16;
+    message Anonymous {
+        string id = 1;
+        string name = 2;
+        string flag = 3;
+    }
+    message Sender {
+        string user_id = 1;
+        string nickname = 2;
+        string card = 3;
+        string sex = 4;
+        int32 age = 5;
+        string area = 6;
+        string level = 7;
+        repeated string roles = 8;
+        string title = 9;
+        string avatar = 10;
+        bool is_bot = 11;
+        string joined_at = 12; //加入时间
+        repeated string role_names = 13;
+    }
+    message Attachments{
+        string content = 1;
+        string content_type = 2;
+        string filename = 3;
+        int32 height = 4;
+        int32 size = 5;
+        string url = 6;
+        int32 width = 7;
+    }
+    map<string, string> extra = 255;
+}
+
+message GroupNotifyEvent {
+    int64 time = 1;
+    int64 self_id = 2;
+    string post_type = 3;
+    string notice_type = 4;
+    string sub_type = 5;
+    string group_id = 6;
+    string operator_id = 7;
+    string timestamp = 8;
+}
+
+message C2CNotifyEvent {
+    int64 time = 1;
+    int64 self_id = 2;
+    string post_type = 3;
+    string notice_type = 4;
+    string sub_type = 5;
+    string openid = 6;
+    string timestamp = 7;
+}
