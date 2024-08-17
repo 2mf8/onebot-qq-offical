@@ -4,7 +4,7 @@ import "onebot_base.proto";
 option go_package= "./onebot";
 
 message Api {
-    ActionType action = 1;
+    string action = 1;
     Params params = 2;
     string echo = 3;
     message Params {
